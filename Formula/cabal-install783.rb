@@ -1,4 +1,4 @@
-re "formula"
+require "formula"
 
 class CabalInstall783 < Formula
   homepage "http://www.haskell.org/haskellwiki/Cabal-Install"
