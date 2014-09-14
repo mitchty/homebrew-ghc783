@@ -26,6 +26,11 @@ class CabalInstall783 < Formula
     inreplace "bootstrap.sh", "list --global",
       "list --global --no-user-package-db"
 
+    system "ghc-pkg", "describe", "rts", ">", "#{Dir.pwd}/rts.pkg"
+    inreplace "rts.pkg", "library-dirs: ",
+      "library-dirs: #{Formula["gmp"].opt_lib} "
+    system "ghc-pkg", "update", "#{Dir.pwd}/rts.pkg"
+
     # Avoid a nasty bug in Cabal by forcing the bootstrap script to pull a later version.
     # (q.v. https://github.com/haskell/cabal/issues/1740)
     inreplace "bootstrap.sh", 'CABAL_VER="1.20.0.0";', 'CABAL_VER="1.20.0.2";'
