@@ -27,8 +27,8 @@ class CabalInstall783 < Formula
       "list --global --no-user-package-db"
 
     system "ghc-pkg", "describe", "rts", ">", "#{Dir.pwd}/rts.pkg"
-    inreplace "rts.pkg", "library-dirs: ",
-      "library-dirs: #{Formula["gmp"].opt_lib} "
+    inreplace "${Dir.pwd}/rts.pkg", "library-dirs: ",
+      "library-dirs: #{Formula["gmp"].opt_lib}\n              "
     system "ghc-pkg", "update", "#{Dir.pwd}/rts.pkg"
 
     # Avoid a nasty bug in Cabal by forcing the bootstrap script to pull a later version.
