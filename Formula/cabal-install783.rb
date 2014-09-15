@@ -26,7 +26,7 @@ class CabalInstall783 < Formula
     inreplace "bootstrap.sh", "list --global",
       "list --global --no-user-package-db"
 
-    system "ghc-pkg", "describe", "rts", ">", "#{Dir.pwd}/rts.pkg"
+    system "ghc-pkg describe rts > #{Dir.pwd}/rts.pkg"
     inreplace "${Dir.pwd}/rts.pkg", "library-dirs: ",
       "library-dirs: #{Formula["gmp"].opt_lib}\n              "
     system "ghc-pkg", "update", "#{Dir.pwd}/rts.pkg"
