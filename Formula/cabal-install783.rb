@@ -27,7 +27,9 @@ class CabalInstall783 < Formula
       "list --global --no-user-package-db"
 
     rts_pkg="#{Dir.pwd}/rts.pkg"
-    system "ghc-pkg", "describe", "rts", ">", rts_pkg
+    File.open(rts_pkg, 'w'){|f|
+      f.write(%x/ghc-pkg describe rts/)
+    }
 
     inreplace rts_pkg, "library-dirs: ",
       "library-dirs: #{Formula["gmp"].opt_lib}\n              "
